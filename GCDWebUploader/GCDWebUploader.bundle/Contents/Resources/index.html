@@ -66,19 +66,19 @@
       
       <div class="btn-toolbar">
         <button type="button" class="btn btn-primary fileinput-button" id="upload-file">
-          <span class="glyphicon glyphicon-upload"></span> Upload Files&hellip;
+          <span class="glyphicon glyphicon-upload"></span> 上传文件&hellip;
           <input id="fileupload" type="file" name="files[]" multiple>
         </button>
         <button type="button" class="btn btn-success" id="create-folder">
-          <span class="glyphicon glyphicon-folder-close"></span> Create Folder&hellip;
+          <span class="glyphicon glyphicon-folder-close"></span> 新建文件夹&hellip;
         </button>
         <button type="button" class="btn btn-default" id="reload">
-          <span class="glyphicon glyphicon-refresh"></span> Refresh
+          <span class="glyphicon glyphicon-refresh"></span> 刷新
         </button>
       </div>
       
       <div class="panel panel-default uploading">
-        <div class="panel-heading">File Uploads in Progress</div>
+        <div class="panel-heading">文件正在上传</div>
         <table class="table table-striped"><tbody id="uploads"></tbody></table>
       </div>
       
@@ -100,17 +100,17 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Create Folder</h4>
+            <h4 class="modal-title">新建文件夹</h4>
           </div>
           <div class="modal-body">
-            <p>Please enter the name of the folder to be created:</p>
+            <p>请输入文件夹名称:</p>
             <form onsubmit="return false">
               <input type="text" autocomplete="off" id="create-input">
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="create-confirm">Create Folder</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="create-confirm">完成</button>
           </div>
         </div>
       </div>

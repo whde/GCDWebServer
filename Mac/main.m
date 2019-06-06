@@ -137,9 +137,9 @@ typedef enum {
 int main(int argc, const char* argv[]) {
   int result = -1;
   @autoreleasepool {
-    Mode mode = kMode_WebServer;
+    Mode mode = kMode_WebUploader;
     BOOL recording = NO;
-    NSString* rootDirectory = NSHomeDirectory();
+    NSString* rootDirectory = [NSHomeDirectory() stringByAppendingString:@"/Downloads/public/"];
     NSString* testDirectory = nil;
     NSString* authenticationMethod = nil;
     NSString* authenticationRealm = nil;
@@ -380,7 +380,7 @@ int main(int argc, const char* argv[]) {
         webServer.delegate = delegate;
 #endif
         fprintf(stdout, "<RUNNING TESTS FROM \"%s\">\n\n", [testDirectory UTF8String]);
-        result = (int)[webServer runTestsWithOptions:@{ GCDWebServerOption_Port : @8080 } inDirectory:testDirectory];
+        result = (int)[webServer runTestsWithOptions:@{ GCDWebServerOption_Port : @8888 } inDirectory:testDirectory];
       } else {
         webServer.delegate = delegate;
         if (recording) {
@@ -389,7 +389,7 @@ int main(int argc, const char* argv[]) {
         }
         fprintf(stdout, "\n");
         NSMutableDictionary* options = [NSMutableDictionary dictionary];
-        [options setObject:@8080 forKey:GCDWebServerOption_Port];
+        [options setObject:@8888 forKey:GCDWebServerOption_Port];
         [options setObject:@(requestNATPortMapping) forKey:GCDWebServerOption_RequestNATPortMapping];
         [options setObject:@(bindToLocalhost) forKey:GCDWebServerOption_BindToLocalhost];
         [options setObject:@"" forKey:GCDWebServerOption_BonjourName];
@@ -401,6 +401,12 @@ int main(int argc, const char* argv[]) {
           } else if ([authenticationMethod isEqualToString:@"Digest"]) {
             [options setObject:GCDWebServerAuthenticationMethod_DigestAccess forKey:GCDWebServerOption_AuthenticationMethod];
           }
+        }
+        if ([webServer isKindOfClass:[GCDWebUploader class]]) {
+          ((GCDWebUploader *)webServer).allowHiddenItems = YES;
+          ((GCDWebUploader *)webServer).title = @"Whde共享文件夹";
+          ((GCDWebUploader *)webServer).prologue = @"欢迎使用Whde共享文件夹，可拖拽上传";
+          ((GCDWebUploader *)webServer).epilogue = @"Whde";
         }
         if ([webServer runWithOptions:options error:NULL]) {
           result = 0;

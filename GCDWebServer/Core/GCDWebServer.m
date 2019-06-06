@@ -45,7 +45,7 @@
 #if TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
 #define kDefaultPort 80
 #else
-#define kDefaultPort 8080
+#define kDefaultPort 8088
 #endif
 
 #define kBonjourResolutionTimeout 5.0
